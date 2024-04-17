@@ -1,6 +1,7 @@
-import socks,socket,ssl,random
+import socks,socket,ssl
 from .proxer.proxies_getter import Proxies_Getter
 from ..common.payloads import *
+import secrets
 
 class Socket_Connection:
 
@@ -25,11 +26,11 @@ class Socket_Connection:
         a = s.split("\r\n\r\n")[0]
         m = a.split("\r\n")[0]
         c = a.split("\r\n")[1:]
-        random.shuffle(c)
-        num=random.randint(1,4)
+        secrets.SystemRandom().shuffle(c)
+        num=secrets.SystemRandom().randint(1,4)
         i=[]
         while len(i)>num:
-            q=random.choice(c)
+            q=secrets.choice(c)
             if 'host:' not in q.lower() or 'user-agent:' not in q.lower() or 'content-length' not in q.lower():
                 i.append(q)
         for x in i:
@@ -40,11 +41,11 @@ class Socket_Connection:
 
     @staticmethod
     def random_param():
-        a = random.randint(1, 2)
+        a = secrets.SystemRandom().randint(1, 2)
         if a == 1:
-            return str(random.randint(1, 1000))
+            return str(secrets.SystemRandom().randint(1, 1000))
         else:
-            return random.choice(Common_Variables.source_string)
+            return secrets.choice(Common_Variables.source_string)
 
 
     @staticmethod
@@ -59,12 +60,12 @@ class Socket_Connection:
         cookie,
         user_agents,
     ):
-        pa = random.choice(paths)  # bypassing cache engine
+        pa = secrets.choice(paths)  # bypassing cache engine
         q = ""
-        for i in range(random.randint(2, 5)):
+        for i in range(secrets.SystemRandom().randint(2, 5)):
             q += Socket_Connection.random_param() + Socket_Connection.random_param()
         p = ""
-        for i in range(random.randint(2, 5)):
+        for i in range(secrets.SystemRandom().randint(2, 5)):
             p += Socket_Connection.random_param() + Socket_Connection.random_param()
         if "?" in pa:
             jo = "&"
@@ -72,21 +73,21 @@ class Socket_Connection:
             jo = "?"
         pa += jo + q + "=" + p
         # setting random headers
-        for l in range(random.randint(1, 5)):
-            ed = random.choice(Common_Variables.accept_encoding_list)
-            oi = random.randint(1, 3)
+        for l in range(secrets.SystemRandom().randint(1, 5)):
+            ed = secrets.choice(Common_Variables.accept_encoding_list)
+            oi = secrets.SystemRandom().randint(1, 3)
             if oi == 2:
                 gy = 0
                 while gy < 1:
-                    df = random.choice(Common_Variables.accept_encoding_list)
+                    df = secrets.choice(Common_Variables.accept_encoding_list)
                     if df != ed:
                         gy += 1
                 ed += ", "
                 ed += df
-        l = random.choice(Common_Variables.accept_language_list)
-        for n in range(random.randint(0, 5)):
-            l += ";q={},".format(round(random.uniform(0.1, 1), 1)) + random.choice(Common_Variables.accept_language_list)
-        kl = random.randint(1, 2)
+        l = secrets.choice(Common_Variables.accept_language_list)
+        for n in range(secrets.SystemRandom().randint(0, 5)):
+            l += ";q={},".format(round(secrets.SystemRandom().uniform(0.1, 1), 1)) + secrets.choice(Common_Variables.accept_language_list)
+        kl = secrets.SystemRandom().randint(1, 2)
         ck = ""
         if cookie:
             ck = "Cookie: " + cookie + "\r\n"
@@ -94,41 +95,41 @@ class Socket_Connection:
             m = "GET {} HTTP/1.1\r\n{}User-Agent: {}\r\nAccept: {}\r\nAccept-Language: {}\r\nAccept-Encoding: {}\r\nAccept-Charset: {}\r\nKeep-Alive: {}\r\nConnection: Keep-Alive\r\nCache-Control: {}\r\nReferer: {}\r\nHost: {}\r\n\r\n".format(
                 pa,
                 ck,
-                random.choice(user_agents),
-                random.choice(Common_Variables.accept_list),
+                secrets.choice(user_agents),
+                secrets.choice(Common_Variables.accept_list),
                 l,
                 ed,
-                random.choice(Common_Variables.accept_charset_list),
-                random.randint(100, 1000),
-                random.choice(Common_Variables.cache_control_list),
+                secrets.choice(Common_Variables.accept_charset_list),
+                secrets.SystemRandom().randint(100, 1000),
+                secrets.choice(Common_Variables.cache_control_list),
                 (
-                    random.choice(Common_Variables.referers_list)
-                    + random.choice(Common_Variables.source_string)
-                    + str(random.randint(0, 100000000))
-                    + random.choice(Common_Variables.source_string)
+                    secrets.choice(Common_Variables.referers_list)
+                    + secrets.choice(Common_Variables.source_string)
+                    + str(secrets.SystemRandom().randint(0, 100000000))
+                    + secrets.choice(Common_Variables.source_string)
                 ),
                 target,
             )
         else:
             k = ""
-            for _ in range(random.randint(post_field_min, post_field_max)):
-                k += random.choice(Common_Variables.source_string)
+            for _ in range(secrets.SystemRandom().randint(post_field_min, post_field_max)):
+                k += secrets.choice(Common_Variables.source_string)
             j = ""
-            for x in range(random.randint(post_min, post_max)):
-                j += random.choice(Common_Variables.source_string)
+            for x in range(secrets.SystemRandom().randint(post_min, post_max)):
+                j += secrets.choice(Common_Variables.source_string)
             par = j + "=" + k
             m = "POST {} HTTP/1.1\r\n{}User-Agent: {}\r\nAccept-language: {}\r\nConnection: keep-alive\r\nKeep-Alive: {}\r\nContent-Length: {}\r\nContent-Type: application/x-www-form-urlencoded\r\nReferer: {}\r\nHost: {}\r\n\r\n{}".format(
                 pa,
                 ck,
-                random.choice(user_agents),
+                secrets.choice(user_agents),
                 l,
-                random.randint(300, 1000),
+                secrets.SystemRandom().randint(300, 1000),
                 len(par),
                 (
-                    random.choice(Common_Variables.referers_list)
-                    + random.choice(Common_Variables.source_string)
-                    + str(random.randint(0, 100000000))
-                    + random.choice(Common_Variables.source_string)
+                    secrets.choice(Common_Variables.referers_list)
+                    + secrets.choice(Common_Variables.source_string)
+                    + str(secrets.SystemRandom().randint(0, 100000000))
+                    + secrets.choice(Common_Variables.source_string)
                 ),
                 target,
                 par,
