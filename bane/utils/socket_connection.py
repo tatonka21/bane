@@ -12,7 +12,7 @@ class Socket_Connection:
             # Since Python 3.6
             ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
         elif hasattr(ssl, 'PROTOCOL_TLS'):
-            ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+            ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
         else:
             ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)#ssl.PROTOCOL_TLS)
         ssl_context.check_hostname = False
