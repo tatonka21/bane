@@ -1,5 +1,5 @@
 import ipaddress
-import random
+import secrets
 
 # Define private IP address ranges
 
@@ -7,11 +7,11 @@ class Common_Variables:
     user_agents_list=[]
     USER_AGENT_PARTS = {
         'browser_header':
-            ['Mozilla/5.0']*100+['SAMSUNG-C5212/C5212XDIK1','SonyEricssonK750c/R1CA','SamsungI8910/Symbianoperating_system/9.1','SonyEricssonK800c/R8BF']+list(set(['Opera/{}.{}'.format(random.randint(7,9),random.randint(0,100)) for x in range(30) ]))+list(set('Nokia{}/GoBrowser/{}.{}.{}'.format(random.choice(['N85','N81','N97_mini',]),random.randint(1,2),random.randint(0,6),random.randint(0,100)) for x in range(20))),
+            ['Mozilla/5.0']*100+['SAMSUNG-C5212/C5212XDIK1','SonyEricssonK750c/R1CA','SamsungI8910/Symbianoperating_system/9.1','SonyEricssonK800c/R8BF']+list(set(['Opera/{}.{}'.format(secrets.SystemRandom().randint(7,9),secrets.SystemRandom().randint(0,100)) for x in range(30) ]))+list(set('Nokia{}/GoBrowser/{}.{}.{}'.format(secrets.choice(['N85','N81','N97_mini',]),secrets.SystemRandom().randint(1,2),secrets.SystemRandom().randint(0,6),secrets.SystemRandom().randint(0,100)) for x in range(20))),
         'operating_system': {
             'linux': {
                 'name': ['Linux x86_64', 'Linux i386'],
-                'ext': ['X11']*10 +['U; Android {}.{}.{}'.format(x,random.randint(0,10),random.randint(0,10)) for x in range(5,11)]
+                'ext': ['X11']*10 +['U; Android {}.{}.{}'.format(x,secrets.SystemRandom().randint(0,10),secrets.SystemRandom().randint(0,10)) for x in range(5,11)]
             },
             'windows': {
                 'name': ['Windows NT 6.1', 'Windows NT 6.3', 'Windows NT 5.1', 'Windows NT.6.2'],
@@ -19,24 +19,24 @@ class Common_Variables:
             },
             'mac': {
                 'name': ['Macintoperating_systemh'],
-                'ext': list(set(['Intel Mac operating_system X %d_%d_%d' % (random.randint(10, 11), random.randint(0, 9), random.randint(0, 5)) for i in range(1, 1000)]))
+                'ext': list(set(['Intel Mac operating_system X %d_%d_%d' % (secrets.SystemRandom().randint(10, 11), secrets.SystemRandom().randint(0, 9), secrets.SystemRandom().randint(0, 5)) for i in range(1, 1000)]))
             },
         },
         'system_platform': {
             'webkit': {
-                'name': list(set(['AppleWebKit/%d.%d' % (random.randint(535, 537), random.randint(1,36)) for i in range(1, 1000)])),
+                'name': list(set(['AppleWebKit/%d.%d' % (secrets.SystemRandom().randint(535, 537), secrets.SystemRandom().randint(1,36)) for i in range(1, 1000)])),
                 'details': ['KHTML, like Gecko'],
-                'extensions': list(set(['Chrome/%d.0.%d.%d Safari/%d.%d' % (random.randint(6, 32), random.randint(100, 2000), random.randint(0, 100), random.randint(535, 537), random.randint(1, 36)) for i in range(1, 1000) ])) + list(set([ 'Version/%d.%d.%d Safari/%d.%d' % (random.randint(4, 6), random.randint(0, 1), random.randint(0, 9), random.randint(535, 537), random.randint(1, 36)) for i in range(1, 1000)]))
+                'extensions': list(set(['Chrome/%d.0.%d.%d Safari/%d.%d' % (secrets.SystemRandom().randint(6, 32), secrets.SystemRandom().randint(100, 2000), secrets.SystemRandom().randint(0, 100), secrets.SystemRandom().randint(535, 537), secrets.SystemRandom().randint(1, 36)) for i in range(1, 1000) ])) + list(set([ 'Version/%d.%d.%d Safari/%d.%d' % (secrets.SystemRandom().randint(4, 6), secrets.SystemRandom().randint(0, 1), secrets.SystemRandom().randint(0, 9), secrets.SystemRandom().randint(535, 537), secrets.SystemRandom().randint(1, 36)) for i in range(1, 1000)]))
             },
             'iexplorer': {
                 'browser_info': {
                     'name': ['MSIE 6.0', 'MSIE 6.1', 'MSIE 7.0', 'MSIE 7.0b', 'MSIE 8.0', 'MSIE 9.0', 'MSIE 10.0'],
                     'ext_pre': ['compatible', 'Windows; U'],
-                    'ext_post': list(set(['Trident/%d.0' % i for i in range(4, 6) ] + [ '.NET CLR %d.%d.%d' % (random.randint(1, 3), random.randint(0, 5), random.randint(1000, 30000)) for i in range(1, 10000)]))
+                    'ext_post': list(set(['Trident/%d.0' % i for i in range(4, 6) ] + [ '.NET CLR %d.%d.%d' % (secrets.SystemRandom().randint(1, 3), secrets.SystemRandom().randint(0, 5), secrets.SystemRandom().randint(1000, 30000)) for i in range(1, 10000)]))
                 }
             },
             'gecko': {
-                'name': list(set(['Gecko/%d%02d%02d Firefox/%d.0' % (random.randint(2001, 2010), random.randint(1,31), random.randint(1,12) , random.randint(10, 25)) for i in range(1, 10000)])),
+                'name': list(set(['Gecko/%d%02d%02d Firefox/%d.0' % (secrets.SystemRandom().randint(2001, 2010), secrets.SystemRandom().randint(1,31), secrets.SystemRandom().randint(1,12) , secrets.SystemRandom().randint(10, 25)) for i in range(1, 10000)])),
                 'details': [],
                 'extensions': []
             }

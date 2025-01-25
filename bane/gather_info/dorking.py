@@ -1,5 +1,6 @@
-import googlesearch,random,time
+import googlesearch,time
 from ..common.payloads import *
+import secrets
 
 class Dorking_Info:
 
@@ -17,7 +18,7 @@ class Dorking_Info:
     ):
         started_at=time.time()
         if user_agent==None:
-            user_agent=random.choice(Common_Variables.user_agents_list)
+            user_agent=secrets.choice(Common_Variables.user_agents_list)
         j = []
         j += googlesearch.search(
             q,
