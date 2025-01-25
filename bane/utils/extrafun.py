@@ -1,6 +1,8 @@
-import cgi, requests, os, random, re, hashlib, urllib, sys, json, gc,socket,socks
+import cgi, requests, os, re, hashlib, urllib, sys, json, gc,socket,socks
 from ..cryptographers import *
 from ..utils.handle_files import *
+import secrets
+
 if sys.version_info < (3, 0):
     import HTMLParser
 else:
@@ -74,7 +76,7 @@ class Userful_Utilities:
             r = requests.Session().get(
                 u,
                 params,
-                headers={"User-Agent": random.choice(Common_Variables.user_agents_list)},
+                headers={"User-Agent": secrets.choice(Common_Variables.user_agents_list)},
                 proxies=proxy,
                 timeout=timeout,
             ).text
