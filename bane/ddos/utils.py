@@ -1,7 +1,9 @@
-import requests, socks, os, sys, urllib, socket, random, time, threading, ssl
+import requests, socks, os, sys, urllib, socket, time, threading, ssl
 import urllib3,json
 from collections import OrderedDict
 from ..utils.socket_connection import *
+import secrets
+
 try:
     if sys.version_info < (3, 0):
         from scapy.all import UDP,IP,DNS,DNSQR,Raw
@@ -73,7 +75,7 @@ class DDoS_Class:
     def get_user_agent(self):
         if "user_agents" in self.__dict__:
             if self.user_agents not in [None,[]]:
-                return random.choice(self.user_agents)
+                return secrets.choice(self.user_agents)
         else:
             return RANDOM_GENERATOR.get_random_user_agent()
 

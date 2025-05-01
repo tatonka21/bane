@@ -1,4 +1,6 @@
 import subprocess, os, xtelnet, sys, cgi, re, json,platform
+import secrets
+
 try:
     from colorama import Fore, Back, Style
 except:
@@ -42,7 +44,7 @@ else:
     import html.parser as HTMLParser
 
 unicode = str
-import requests, socket, random, time, ssl
+import requests, socket, time, ssl
 import urllib3
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -103,7 +105,7 @@ class Vulnerability_Scanner_Utilities:
         if user_agent:
             us = user_agent
         else:
-            us = random.choice(Common_Variables.user_agents_list)
+            us = secrets.choice(Common_Variables.user_agents_list)
         h = {}
         if bypass == True:
             u += "#"
@@ -166,7 +168,7 @@ class Vulnerability_Scanner_Utilities:
     def random_string(size):
         s = ""
         for x in range(size):
-            s += random.choice(Common_Variables.source_string)
+            s += secrets.choice(Common_Variables.source_string)
         return s
 
 
@@ -184,7 +186,7 @@ class Vulnerability_Scanner_Utilities:
 
     @staticmethod
     def setup_proxy(proxies):
-        return random.choice(proxies)
+        return secrets.choice(proxies)
 
 
 
@@ -192,7 +194,7 @@ class Vulnerability_Scanner_Utilities:
     def setup_ua(usra):
         if usra:
             return usra
-        return random.choice(Common_Variables.user_agents_list)
+        return secrets.choice(Common_Variables.user_agents_list)
 
 
     @staticmethod
